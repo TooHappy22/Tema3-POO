@@ -1,0 +1,7 @@
+#include "Vehicul.h"
+#include "Scuter.h"
+#include "Masina.h"
+#include "Duba.h"
+#include "Firma.h"
+#include "Articol.h"
+#include "Comanda.h"
