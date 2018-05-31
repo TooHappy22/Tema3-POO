@@ -10,7 +10,7 @@ unordered_map< int, Comanda< double > > comenzi;
 Firma< double > firma;
 vector< bool > secunde(86405, false);
 
-void ConvertSecondsInHoursAndMinutes(int seconds, int &hours, int &minutes) {
+void ConvertSecondsToHoursAndMinutes(int seconds, int &hours, int &minutes) {
     hours = seconds / 3600;
     if(hours == 0) {
         minutes = seconds / 60;
@@ -47,7 +47,7 @@ int main() {
             ++cntComanda;
             cout << "Comanda numarul " << cntComanda << " ";
 
-            int h = 0, min = 0; ConvertSecondsInHoursAndMinutes(i, h, min);
+            int h = 0, min = 0; ConvertSecondsToHoursAndMinutes(i, h, min);
             if(h == 0) {
                 if(min < 10) {
                     cout << "s-a facut la ora: 0" << h << ":0" << min << ".\n";        
@@ -68,7 +68,7 @@ int main() {
             if(idx == -1) {
                 cout << "\tComanda " << cntComanda << " nu a putut fi preluata. Nu am gasit o masina care sa respecte conditiile!\n\n";
             } else {
-                ConvertSecondsInHoursAndMinutes(finalTime, h, min);
+                ConvertSecondsToHoursAndMinutes(finalTime, h, min);
                 cout << "\tComanda acceptata. Comanda va fi preluata de catre masina cu numarul: " << idx + 1 << ".\n";
                 cout << "\tAici aveti detaliile despre vehicul:\n\t\t"; firma.PrintDataVehicul(idx); cout << "\n";
             }
