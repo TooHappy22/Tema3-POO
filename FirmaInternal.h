@@ -28,7 +28,7 @@ class Firma {
         void AdaugaVehicul(Vehicul< T >*);
         T GetMasaMaxima() const;
         T GetVolumMaxim() const;
-        int GetBestVehicle(Comanda< T >&, const int&);
+        int GetBestVehicle(Comanda< T >&, const int&, int&);
         void ElibereazaVehicul(const int&);
         void PrintDataVehicul(const int &);
 

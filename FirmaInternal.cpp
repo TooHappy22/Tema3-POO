@@ -49,7 +49,7 @@ T Firma< T >::GetVolumMaxim() const {
 }
 
 template< class T >
-int Firma< T >::GetBestVehicle(Comanda< T >& comanda, const int &currentTime) {
+int Firma< T >::GetBestVehicle(Comanda< T >& comanda, const int &currentTime, int &finalTime) {
     int bestVehicle = 0, bestTime = 1e9;
 
     if(comanda.NecesitaFrigorifica() == true) {
@@ -127,6 +127,8 @@ int Firma< T >::GetBestVehicle(Comanda< T >& comanda, const int &currentTime) {
     if(bestTime == 1e9) {
         return -1;
     }
+
+    finalTime = currentTime + bestTime;
 
     this->m_vehiculeBlocate.push({currentTime + bestTime, bestVehicle});
     this->m_vehicule[bestVehicle]->ChangeDisponibilitate();

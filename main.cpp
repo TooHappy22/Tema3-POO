@@ -10,6 +10,16 @@ unordered_map< int, Comanda< double > > comenzi;
 Firma< double > firma;
 vector< bool > secunde(86405, false);
 
+void ConvertSecondsInHoursAndMinutes(int seconds, int &hours, int &minutes) {
+    hours = seconds / 3600;
+    if(hours == 0) {
+        minutes = seconds / 60;
+    } else {
+        minutes = seconds % (hours * 60);
+        minutes %= 60;
+    }
+}
+
 int main() {
     in.open("vehicule.in", istream::in); out.open("vehicule.out", ostream::out);
 
@@ -37,19 +47,28 @@ int main() {
             ++cntComanda;
             cout << "Comanda numarul " << cntComanda << " ";
 
-            int hour = i / 3600;
-            if(hour == 0) {
-                cout << "s-a facut la ora: 00:" << i / 60 << ".\n";
+            int h = 0, min = 0; ConvertSecondsInHoursAndMinutes(i, h, min);
+            if(h == 0) {
+                if(min < 10) {
+                    cout << "s-a facut la ora: 0" << h << ":0" << min << ".\n";        
+                } else {
+                    cout << "s-a facut la ora: 0" << h << ":" << min << ".\n";    
+                }  
             } else {
-                int minut = i % (hour * 60);
-                cout << "s-a facut la ora: " << hour << ":" << minut % 60 << ".\n";
+                if(min < 10) {
+                    cout << "s-a facut la ora: " << h << ":0" << min << ".\n";        
+                } else {
+                    cout << "s-a facut la ora: " << h << ":" << min << ".\n";    
+                }  
             }
 
-            int idx = firma.GetBestVehicle(comenzi[i], i);
+            int finalTime = 0;
+            int idx = firma.GetBestVehicle(comenzi[i], i, finalTime); // cout << finalTime << "\n";
 
             if(idx == -1) {
                 cout << "\tComanda " << cntComanda << " nu a putut fi preluata. Nu am gasit o masina care sa respecte conditiile!\n\n";
             } else {
+                ConvertSecondsInHoursAndMinutes(finalTime, h, min);
                 cout << "\tComanda acceptata. Comanda va fi preluata de catre masina cu numarul: " << idx + 1 << ".\n";
                 cout << "\tAici aveti detaliile despre vehicul:\n\t\t"; firma.PrintDataVehicul(idx); cout << "\n";
             }
